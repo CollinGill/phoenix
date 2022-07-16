@@ -2,7 +2,6 @@ make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/collin/dev/ai/phoenix'
 g++    -c -o src/board.o src/board.cpp
 g++    -c -o src/main.o src/main.cpp
-g++    -c -o src/piece.o src/piece.cpp
-g++ -Wall -o phoenix src/board.o src/main.o src/piece.o
+g++ -Wall -o phoenix src/board.o src/main.o
 make: Leaving directory '/home/collin/dev/ai/phoenix'
  
