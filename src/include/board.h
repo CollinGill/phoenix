@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <string>
 
 namespace Board
 {
@@ -9,8 +10,16 @@ namespace Board
     class CBoard
     {
     // Unsure yet exactly how to handle the encapsulation
+    public:
+        CBoard();
+        ~CBoard();
+
+        void load_fen(std::string fen);
+        void dump();
+
     private:
         // Bitboards for the white and black pieces
+        Bitboard white_pieces;
         Bitboard white_pawns;
         Bitboard white_knights;
         Bitboard white_bishops;
@@ -18,6 +27,7 @@ namespace Board
         Bitboard white_queen;
         Bitboard white_king;
 
+        Bitboard black_pieces;
         Bitboard black_pawns;
         Bitboard black_knights;
         Bitboard black_bishops;
