@@ -6,6 +6,19 @@
 namespace Board
 {
     typedef uint64_t Bitboard;
+    enum Color { WHITE, BLACK };
+    enum Square 
+    {
+        a1, b1, c1, d1, e1, f1, g1, h1,
+        a2, b2, c2, d2, e2, f2, g2, h2,
+        a3, b3, c3, d3, e3, f3, g3, h3,
+        a4, b4, c4, d4, e4, f4, g4, h4,
+        a5, b5, c5, d5, e5, f5, g5, h5,
+        a6, b6, c6, d6, e6, f6, g6, h6,
+        a7, b7, c7, d7, e7, f7, g7, h7,
+        a8, b8, c8, d8, e8, f8, g8, h8,
+        NONE
+    };
 
     class CBoard
     {
@@ -14,17 +27,21 @@ namespace Board
         CBoard();
         ~CBoard();
 
+        Color to_move;
+        Square en_passant = NONE; 
+
         void load_fen(std::string fen);
         void dump();
 
     private:
+
         // Bitboards for the white and black pieces
         Bitboard white_pieces;
         Bitboard white_pawns;
         Bitboard white_knights;
         Bitboard white_bishops;
         Bitboard white_rooks;
-        Bitboard white_queen;
+        Bitboard white_queens;
         Bitboard white_king;
 
         Bitboard black_pieces;
@@ -32,13 +49,13 @@ namespace Board
         Bitboard black_knights;
         Bitboard black_bishops;
         Bitboard black_rooks;
-        Bitboard black_queen;
+        Bitboard black_queens;
         Bitboard black_king;
 
 
         // Bitboards (little endian)
         /* Neighboring squares
-           north west  north   north East
+           north west  north   north east
                   +7    +8    +9
                      \  |  /
         west    -1 <-  0 -> +1    east
@@ -48,17 +65,8 @@ namespace Board
         */
 
         // Enum to get each square's corresponding bit
-        enum squares_bit 
-        {
-            a1, b1, c1, d1, e1, f1, g1, h1,
-            a2, b2, c2, d2, e2, f2, g2, h2,
-            a3, b3, c3, d3, e3, f3, g3, h3,
-            a4, b4, c4, d4, e4, f4, g4, h4,
-            a5, b5, c5, d5, e5, f5, g5, h5,
-            a6, b6, c6, d6, e6, f6, g6, h6,
-            a7, b7, c7, d7, e7, f7, g7, h7,
-            a8, b8, c8, d8, e8, f8, g8, h8
-        };
+
+        void parse_fen_piece(char chr, Square& pos);
 
         // Rank and File
         const Bitboard a_file             = 0x0101010101010101;
